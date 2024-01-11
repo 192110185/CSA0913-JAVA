@@ -1,0 +1,44 @@
+public class MatrixMultiplication {
+
+    public static void main(String[] args) {
+        int[][] mat1 = {{1, 2}, {5, 3}};
+        int[][] mat2 = {{2, 3}, {4, 1}};
+
+        int[][] result = multiplyMatrices(mat1, mat2);
+
+        System.out.println("Mat Sum = ");
+        printMatrix(result);
+    }
+
+    private static int[][] multiplyMatrices(int[][] mat1, int[][] mat2) {
+        int row1 = mat1.length;
+        int col1 = mat1[0].length;
+        int row2 = mat2.length;
+        int col2 = mat2[0].length;
+
+        if (col1 != row2) {
+            throw new IllegalArgumentException("Invalid matrix dimensions for multiplication");
+        }
+
+        int[][] result = new int[row1][col2];
+
+        for (int i = 0; i < row1; i++) {
+            for (int j = 0; j < col2; j++) {
+                for (int k = 0; k < col1; k++) {
+                    result[i][j] += mat1[i][k] * mat2[k][j];
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int num : row) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+    }
+}
