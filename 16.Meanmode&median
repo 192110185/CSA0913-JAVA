@@ -1,0 +1,19 @@
+import java.util.*;
+import java.util.stream.*;
+public class MeanMedianMode {
+    public static void main(String[] args) {
+        Scanner i = new Scanner(System.in);
+        System.out.print("Enter the number of elements in the array: ");
+        int n = i.nextInt();
+        double[] a = new double[n];
+        System.out.println("Enter the elements of the array:");
+        for (int j = 0; j < n; j++) a[j] = i.nextDouble();
+        i.close();
+        double m = Arrays.stream(a).average().orElse(0);
+        double d = Arrays.stream(a).sorted().toArray()[n / 2];
+        double e = Arrays.stream(a).boxed().collect(Collectors.groupingBy(Double::doubleValue, Collectors.counting())).entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(Double.NaN);
+        System.out.println("Mean: " + m);
+        System.out.println("Median: " + d);
+        System.out.println("Mode: " + e);
+    }
+}
